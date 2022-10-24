@@ -169,7 +169,62 @@ class Motorbike(Vehicle):
         if self.can_wheelie:
             print("doing a wheelie")
 
+class Boat(Vehicle):
+     """
+    A specific subclass of vehicle that represents a boat. It additionally contains
+    attributes:
+        can_goinwater: (boolean) If the motorbike can float or not
+    methods:
+        __init__(engine_size, num_of_seats, fuel_type, can_goinwater):
+        sets the can_goinwater boolean and calls the parent constructor
 
+        goinwater(): A method that allows waterway travel
+
+    """
+
+    def __init__(self, engine_size, num_of_seats, fuel_type, can_goinwater):
+        """
+        Initialise method that sets the can_goinwater boolean if its valid and calls the parent constructor
+            :param engine_size: (int) representing the engine size in cc
+
+            :param num_of_seats: (int) representing the number of seats
+
+            :param fuel_type: (FuelType) A representation the vehicles fuel type
+
+            :param can_goinwater: (boolean) If the boat can float
+
+        """
+
+        try:
+
+            # Checks that can_goinwater is a boolean
+            if not isinstance(can_goinwater, bool):
+                raise Exception("can_goinwater is not a boolean")
+
+            # Sets the class variables and calls the parent constructor
+            self.can_wheelie = can_goinwater
+            super().__init__(engine_size, num_of_seats, fuel_type)
+
+        # Prints any errors if they occur
+        except Exception as e:
+            print(str(e))
+
+            # Creates a default Vehicle if the inputs are invalid
+            print("creating default boat")
+            self.can_goinwater = False
+            super().__init__(1000, 4, FuelType.PETROL)
+
+    def goinwater(self):
+        """
+        A method that performs floatation
+            :return: There is no return
+
+        """
+
+        # If the bike can float, do a float
+        if self.can_goinwater:
+            print("doing a float")
+    
 class Van(Vehicle):
     """
     A specific subclass of vehicle that represents a van. It additionally contains
